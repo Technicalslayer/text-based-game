@@ -1,7 +1,7 @@
 # handles logic that is shared between live and text side
 # stores game state and current room reference
 extends Node
-
+# this is a test
 onready var current_room: Room = find_node("Room")
 onready var current_exit: Exit = find_node("Room").find_node("ExitNorth")
 onready var player = find_node("Player")
