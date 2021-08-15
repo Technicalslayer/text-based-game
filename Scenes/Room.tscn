@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://temp_tiles.tres" type="TileSet" id=1]
-[ext_resource path="res://Scenes/Room.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Room.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Exit.tscn" type="PackedScene" id=3]
 
 [node name="Room" type="Node2D"]

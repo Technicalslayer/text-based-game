@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Room",
 "language": "GDScript",
-"path": "res://Scenes/Room.gd"
+"path": "res://Scripts/Room.gd"
 } ]
 _global_script_class_icons={
 "CommandProcessor": "",

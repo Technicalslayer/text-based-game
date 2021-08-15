@@ -20,9 +20,7 @@ func _ready():
 	max_scroll_length = scrollbar.max_value
 	
 	# starting text # move to game controller?
-	var starting_message = Response.instance()
-	starting_message.text = "You find yourself in an abandoned cavern. You see a strange idol on a stand. Type 'help' to see available commands."
-	add_response_to_game(starting_message)
+	add_response("Type 'help' to see available commands.")
 
 
 func handle_scrollbar_changed():
@@ -31,13 +29,20 @@ func handle_scrollbar_changed():
 		scroll.scroll_vertical = max_scroll_length
 
 
-func add_text_as_response(input_text: String, response_text: String):
+func add_input_and_response(input_text: String, response_text: String):
 	var response = InputResponse.instance()
 	response.set_text(input_text, response_text)
-	add_response_to_game(response)
+	add_control_to_display(response)
 
 
-func add_response_to_game(response: Control):
+func add_response(response_text: String):
+	var response = Response.instance()
+	response.text = response_text
+	add_control_to_display(response)
+
+
+# adds control node to history rows display in game
+func add_control_to_display(response: Control):
 	history_rows.add_child(response)
 	delete_history_beyond_limit()
 

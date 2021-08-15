@@ -6,6 +6,7 @@ enum {KEY, NPC, ENEMY, SWITCH, PUZZLE}
 export (NodePath) var connected_exit_path
 onready var connected_exit = get_node(connected_exit_path)
 export (String) var direction = ""
+export (String) var description = ""
 export (bool) var locked = false
 # this represents where to place the player when entering
 onready var entrance_position = $Position2D

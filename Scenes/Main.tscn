@@ -1,13 +1,13 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Scenes/TextController.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/TextController.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/CommandProcessor.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Input.gd" type="Script" id=3]
 [ext_resource path="res://Fonts/plex_mono_12.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Fonts/plex_mono_16.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Scripts/GameController.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Room.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/Room.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/Exit.tscn" type="PackedScene" id=9]
 [ext_resource path="res://temp_tiles.tres" type="TileSet" id=10]
 
@@ -147,6 +147,7 @@ current = true
 
 [node name="Room" type="Node2D" parent="LiveSide"]
 script = ExtResource( 8 )
+description = "You find yourself in an abandoned cavern. You see a strange idol on a stand. "
 
 [node name="Background" type="TileMap" parent="LiveSide/Room"]
 tile_set = ExtResource( 10 )
@@ -164,17 +165,19 @@ show_collision = true
 format = 1
 tile_data = PoolIntArray( 17, 0, 65537, 27, 0, 65537, 65553, 0, 65537, 65563, 0, 65537, 131089, 0, 65537, 131099, 0, 65537, 196625, 0, 65537, 196635, 0, 65537, 262161, 0, 65537, 262171, 0, 65537, 327697, 0, 65537, 327707, 0, 65537, 393233, 0, 65537, 393243, 0, 65537, 458769, 0, 65537, 458779, 0, 65537, 524305, 0, 65537, 524315, 0, 65537, 589841, 0, 65537, 589851, 0, 65537, 655377, 0, 65537, 655387, 0, 65537, 720913, 0, 65537, 720923, 0, 65537, 786449, 0, 65537, 786459, 0, 65537, 851968, 0, 65537, 851969, 0, 65537, 851970, 0, 65537, 851971, 0, 65537, 851972, 0, 65537, 851973, 0, 65537, 851974, 0, 65537, 851975, 0, 65537, 851976, 0, 65537, 851977, 0, 65537, 851978, 0, 65537, 851979, 0, 65537, 851980, 0, 65537, 851981, 0, 65537, 851982, 0, 65537, 851983, 0, 65537, 851984, 0, 65537, 851985, 0, 65537, 851995, 0, 65537, 917531, 0, 65537, 983067, 0, 65537, 1048603, 0, 65537, 1114139, 0, 65537, 1179675, 0, 65537, 1245211, 0, 65537, 1310747, 0, 65537, 1376283, 0, 65537, 1441792, 0, 65537, 1441793, 0, 65537, 1441794, 0, 65537, 1441795, 0, 65537, 1441796, 0, 65537, 1441797, 0, 65537, 1441798, 0, 65537, 1441799, 0, 65537, 1441800, 0, 65537, 1441801, 0, 65537, 1441802, 0, 65537, 1441803, 0, 65537, 1441804, 0, 65537, 1441805, 0, 65537, 1441806, 0, 65537, 1441807, 0, 65537, 1441808, 0, 65537, 1441809, 0, 65537, 1441819, 0, 65537, 1507345, 0, 65537, 1507355, 0, 65537, 1572881, 0, 65537, 1572891, 0, 65537, 1638417, 0, 65537, 1638427, 0, 65537, 1703953, 0, 65537, 1703963, 0, 65537, 1769489, 0, 65537, 1769499, 0, 65537, 1835025, 0, 65537, 1835035, 0, 65537, 1900561, 0, 65537, 1900571, 0, 65537, 1966097, 0, 65537, 1966107, 0, 65537, 2031633, 0, 65537, 2031643, 0, 65537, 2097169, 0, 65537, 2097179, 0, 65537, 2162705, 0, 65537, 2162715, 0, 65537, 2228241, 0, 65537, 2228251, 0, 65537, 2293777, 0, 65537, 2293787, 0, 65537, 2359313, 0, 65537, 2359323, 0, 65537, 2424849, 0, 65537, 2424859, 0, 65537 )
 
-[node name="ExitNorth" parent="LiveSide/Room" instance=ExtResource( 9 )]
+[node name="North" parent="LiveSide/Room" instance=ExtResource( 9 )]
 position = Vector2( 366.159, 19.5998 )
-connected_exit_path = NodePath("../../Room2/ExitSouth")
+connected_exit_path = NodePath("../../Room2/South")
 direction = "North"
+description = "A plain looking door."
 
-[node name="Position2D" parent="LiveSide/Room/ExitNorth" index="1"]
+[node name="Position2D" parent="LiveSide/Room/North" index="1"]
 position = Vector2( 1.5874, 47.622 )
 
 [node name="Room2" type="Node2D" parent="LiveSide"]
 position = Vector2( 2.66962, -612.691 )
 script = ExtResource( 8 )
+description = "North Room"
 
 [node name="Background" type="TileMap" parent="LiveSide/Room2"]
 tile_set = ExtResource( 10 )
@@ -192,16 +195,17 @@ show_collision = true
 format = 1
 tile_data = PoolIntArray( 17, 0, 65537, 27, 0, 65537, 65553, 0, 65537, 65563, 0, 65537, 131089, 0, 65537, 131099, 0, 65537, 196625, 0, 65537, 196635, 0, 65537, 262161, 0, 65537, 262171, 0, 65537, 327697, 0, 65537, 327707, 0, 65537, 393233, 0, 65537, 393243, 0, 65537, 458769, 0, 65537, 458779, 0, 65537, 524305, 0, 65537, 524315, 0, 65537, 589841, 0, 65537, 589851, 0, 65537, 655377, 0, 65537, 655387, 0, 65537, 720913, 0, 65537, 720923, 0, 65537, 786449, 0, 65537, 786459, 0, 65537, 851968, 0, 65537, 851969, 0, 65537, 851970, 0, 65537, 851971, 0, 65537, 851972, 0, 65537, 851973, 0, 65537, 851974, 0, 65537, 851975, 0, 65537, 851976, 0, 65537, 851977, 0, 65537, 851978, 0, 65537, 851979, 0, 65537, 851980, 0, 65537, 851981, 0, 65537, 851982, 0, 65537, 851983, 0, 65537, 851984, 0, 65537, 851985, 0, 65537, 851995, 0, 65537, 917531, 0, 65537, 983067, 0, 65537, 1048603, 0, 65537, 1114139, 0, 65537, 1179675, 0, 65537, 1245211, 0, 65537, 1310747, 0, 65537, 1376283, 0, 65537, 1441792, 0, 65537, 1441793, 0, 65537, 1441794, 0, 65537, 1441795, 0, 65537, 1441796, 0, 65537, 1441797, 0, 65537, 1441798, 0, 65537, 1441799, 0, 65537, 1441800, 0, 65537, 1441801, 0, 65537, 1441802, 0, 65537, 1441803, 0, 65537, 1441804, 0, 65537, 1441805, 0, 65537, 1441806, 0, 65537, 1441807, 0, 65537, 1441808, 0, 65537, 1441809, 0, 65537, 1441819, 0, 65537, 1507345, 0, 65537, 1507355, 0, 65537, 1572881, 0, 65537, 1572891, 0, 65537, 1638417, 0, 65537, 1638427, 0, 65537, 1703953, 0, 65537, 1703963, 0, 65537, 1769489, 0, 65537, 1769499, 0, 65537, 1835025, 0, 65537, 1835035, 0, 65537, 1900561, 0, 65537, 1900571, 0, 65537, 1966097, 0, 65537, 1966107, 0, 65537, 2031633, 0, 65537, 2031643, 0, 65537, 2097169, 0, 65537, 2097179, 0, 65537, 2162705, 0, 65537, 2162715, 0, 65537, 2228241, 0, 65537, 2228251, 0, 65537, 2293777, 0, 65537, 2293787, 0, 65537, 2359313, 0, 65537, 2359323, 0, 65537, 2424849, 0, 65537, 2424859, 0, 65537 )
 
-[node name="ExitSouth" parent="LiveSide/Room2" instance=ExtResource( 9 )]
+[node name="South" parent="LiveSide/Room2" instance=ExtResource( 9 )]
 position = Vector2( 363.487, 586.211 )
-connected_exit_path = NodePath("../../Room/ExitNorth")
+connected_exit_path = NodePath("../../Room/North")
 direction = "South"
+description = "A plain looking door."
 
-[node name="Position2D" parent="LiveSide/Room2/ExitSouth" index="1"]
+[node name="Position2D" parent="LiveSide/Room2/South" index="1"]
 position = Vector2( 0, -42.8598 )
 
 [connection signal="text_entered" from="CanvasLayer/TextSide/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="CanvasLayer/TextSide/MarginContainer/Rows/InputArea/HBoxContainer/Input" method="_on_Input_text_entered"]
 [connection signal="text_entered" from="CanvasLayer/TextSide/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="." method="_on_Input_text_entered"]
 
-[editable path="LiveSide/Room/ExitNorth"]
-[editable path="LiveSide/Room2/ExitSouth"]
+[editable path="LiveSide/Room/North"]
+[editable path="LiveSide/Room2/South"]

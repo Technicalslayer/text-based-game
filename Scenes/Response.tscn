@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Fonts/plex_mono_18.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Scenes/Response.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Response.gd" type="Script" id=2]
 
 [node name="Response" type="Label"]
 margin_top = 17.0

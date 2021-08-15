@@ -1,12 +1,14 @@
 # handles logic that is shared between live and text side
 # stores game state and current room reference
 extends Node
-# this is a test
-onready var current_room: Room = find_node("Room")
-onready var current_exit: Exit = find_node("Room").find_node("ExitNorth")
+
+
+onready var current_room = find_node("Room")
+onready var current_exit: Exit = find_node("Room").find_node("North")
 onready var player = find_node("Player")
 onready var command_processor: CommandProcessor = find_node("CommandProcessor")
 onready var text_controller = find_node("TextSide")
+
 
 func _ready() -> void:
 	change_rooms(current_exit)
@@ -22,12 +24,19 @@ func change_rooms(exit: Exit):
 	command_processor.current_room = current_room
 	
 	# add text describing room
+	text_controller.add_response(current_room.description)
+	
+	# list off exits and objects of interest
+	text_controller.add_response(current_room.exit_list)
 
 
 func _on_Input_text_entered(new_text: String) -> void:
 	if new_text.empty(): # do nothing
 		return
 	var response = command_processor.process_command(new_text)
+	
+	# add input and response to display
+	text_controller.add_input_and_response(new_text, response.text)
 	
 	# change game state based on response
 	# get command enum
@@ -41,9 +50,7 @@ func _on_Input_text_entered(new_text: String) -> void:
 				pass
 			CommandProcessor.Command.HELP:
 				pass
+			CommandProcessor.Command.LOOK:
+				pass
 			_:
 				pass
-	
-	# add input and response to display
-	text_controller.add_text_as_response(new_text, response.text)
-	

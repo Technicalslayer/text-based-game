@@ -1,7 +1,7 @@
 extends Node
 class_name CommandProcessor
 
-enum Command {GO, PICKUP, USE, HELP}
+enum Command {GO, PICKUP, USE, HELP, LOOK}
 
 class CommandResult:
 	var passed_command # enum of type Command
@@ -30,6 +30,8 @@ func process_command(input: String) -> CommandResult:
 			return go(second_word, result)
 		"help":
 			return help(result)
+		"look":
+			return look(second_word, result)
 		_:
 			result.text = "Unrecognized command - please try again."
 			return result
@@ -59,3 +61,29 @@ func help(result: CommandResult) -> CommandResult:
 	result.passed_command = Command.HELP
 	result.valid = true
 	return result
+
+func look(second_word: String, result: CommandResult) -> CommandResult:
+	result.passed_command = Command.LOOK
+	if second_word == "":
+		result.text = current_room.description
+		return result
+	
+	if second_word in current_room.exits:
+		result.target = current_room.exits[second_word]
+		result.text = result.target.description
+		if result.target.locked:
+			result.text += " It's locked."
+		else:
+			result.text += " It's unlocked"
+		return result
+	elif second_word in current_room.items:
+		result.target = current_room.items[second_word]
+		result.text = result.target.description
+		return result
+	elif second_word in current_room.characters:
+		result.target = current_room.characters[second_word]
+		result.text = result.target.description
+		return result
+	else:
+		result.text = "Can't look at something that doesn't exist"
+		return result
