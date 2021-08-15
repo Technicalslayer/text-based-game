@@ -30,9 +30,9 @@ script = ExtResource( 6 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="TextSide" type="PanelContainer" parent="CanvasLayer"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-size_flags_horizontal = 0
+margin_right = 398.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -44,8 +44,10 @@ max_lines_remembered = 50
 script = ExtResource( 2 )
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TextSide"]
-margin_right = 400.0
+margin_right = 398.0
 margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -54,24 +56,24 @@ custom_constants/margin_bottom = 10
 [node name="Rows" type="VBoxContainer" parent="CanvasLayer/TextSide/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 390.0
+margin_right = 388.0
 margin_bottom = 590.0
 custom_constants/separation = 10
 alignment = 1
 
 [node name="GameInfo" type="PanelContainer" parent="CanvasLayer/TextSide/MarginContainer/Rows"]
-margin_right = 380.0
+margin_right = 378.0
 margin_bottom = 530.0
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="Scroll" type="ScrollContainer" parent="CanvasLayer/TextSide/MarginContainer/Rows/GameInfo"]
-margin_right = 380.0
+margin_right = 378.0
 margin_bottom = 530.0
 scroll_horizontal_enabled = false
 
 [node name="HistoryRows" type="VBoxContainer" parent="CanvasLayer/TextSide/MarginContainer/Rows/GameInfo/Scroll"]
-margin_right = 380.0
+margin_right = 378.0
 margin_bottom = 530.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -79,13 +81,13 @@ custom_constants/separation = 20
 
 [node name="InputArea" type="PanelContainer" parent="CanvasLayer/TextSide/MarginContainer/Rows"]
 margin_top = 540.0
-margin_right = 380.0
+margin_right = 378.0
 margin_bottom = 580.0
 rect_min_size = Vector2( 0, 40 )
 custom_styles/panel = SubResource( 3 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TextSide/MarginContainer/Rows/InputArea"]
-margin_right = 380.0
+margin_right = 378.0
 margin_bottom = 40.0
 
 [node name="Caret" type="Label" parent="CanvasLayer/TextSide/MarginContainer/Rows/InputArea/HBoxContainer"]
@@ -97,7 +99,7 @@ text = " > "
 
 [node name="Input" type="LineEdit" parent="CanvasLayer/TextSide/MarginContainer/Rows/InputArea/HBoxContainer"]
 margin_left = 25.0
-margin_right = 380.0
+margin_right = 378.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 custom_styles/focus = SubResource( 4 )
@@ -106,10 +108,37 @@ custom_fonts/font = ExtResource( 5 )
 max_length = 48
 script = ExtResource( 3 )
 
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="HBoxContainer"]
+margin_right = 400.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="HBoxContainer/ViewportContainer"]
+size = Vector2( 400, 600 )
+handle_input_locally = false
+usage = 0
+render_target_update_mode = 3
+
 [node name="LiveSide" type="Node2D" parent="."]
 position = Vector2( 400, 0 )
 
 [node name="Player" parent="LiveSide" instance=ExtResource( 7 )]
+position = Vector2( 345.008, 285.201 )
 z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="LiveSide/Player"]
