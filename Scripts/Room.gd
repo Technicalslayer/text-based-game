@@ -25,7 +25,7 @@ func _ready() -> void:
 			characters[i.name.to_lower()] = i
 			character_list += i.name + " "
 	
-	print(exits)
+#	print(exits)
 
 
 func connect_exits():

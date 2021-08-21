@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/TextController.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/CommandProcessor.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scripts/Room.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/Exit.tscn" type="PackedScene" id=9]
 [ext_resource path="res://temp_tiles.tres" type="TileSet" id=10]
+[ext_resource path="res://Scenes/Key.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0431373, 0.0431373, 0.0431373, 1 )
@@ -203,6 +204,9 @@ description = "A plain looking door."
 
 [node name="Position2D" parent="LiveSide/Room2/South" index="1"]
 position = Vector2( 0, -42.8598 )
+
+[node name="Key" parent="LiveSide/Room2" instance=ExtResource( 11 )]
+position = Vector2( 360.628, 313.534 )
 
 [connection signal="text_entered" from="CanvasLayer/TextSide/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="CanvasLayer/TextSide/MarginContainer/Rows/InputArea/HBoxContainer/Input" method="_on_Input_text_entered"]
 [connection signal="text_entered" from="CanvasLayer/TextSide/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="." method="_on_Input_text_entered"]

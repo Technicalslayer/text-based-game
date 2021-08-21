@@ -9,9 +9,14 @@ onready var player = find_node("Player")
 onready var command_processor: CommandProcessor = find_node("CommandProcessor")
 onready var text_controller = find_node("TextSide")
 
+var inventory_item_scene = preload("res://Scenes/InventoryItem.tscn")
+
 
 func _ready() -> void:
 	change_rooms(current_exit)
+	# pass reference
+	if command_processor:
+		command_processor.player = player
 
 
 func change_rooms(exit: Exit):
@@ -28,6 +33,8 @@ func change_rooms(exit: Exit):
 	
 	# list off exits and objects of interest
 	text_controller.add_response(current_room.exit_list)
+	text_controller.add_response(current_room.item_list)
+#	text_controller.add_response(current_room.character_list)
 
 
 func _on_Input_text_entered(new_text: String) -> void:
@@ -45,12 +52,30 @@ func _on_Input_text_entered(new_text: String) -> void:
 			CommandProcessor.Command.GO:
 				change_rooms(response.target)
 			CommandProcessor.Command.PICKUP:
+				# move target to player's inventory
+				pickup_item(response)
 				pass
 			CommandProcessor.Command.USE:
 				pass
 			CommandProcessor.Command.HELP:
 				pass
 			CommandProcessor.Command.LOOK:
+#				if response.target == "player":
+#					response.text = player.inventory_as_text # FIXME: this is bad? Doing function of command processor
 				pass
 			_:
 				pass
+
+
+func pickup_item(response):
+	if response.valid:
+		# move item to player's inventory
+		var inv_item = inventory_item_scene.instance()
+		inv_item.name = response.target.name
+		inv_item.description = response.target.description
+		inv_item.item_type = response.target.item_type
+		
+		player.add_item(inv_item)
+		# remove item from room
+		response.target.queue_free()
+	pass
