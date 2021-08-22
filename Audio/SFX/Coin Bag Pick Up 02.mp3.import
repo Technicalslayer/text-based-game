@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Coin Bag Pick Up 02.mp3-78241ed6987b5c667a3457e869c07946.mp3str"
+
+[deps]
+
+source_file="res://Audio/SFX/Coin Bag Pick Up 02.mp3"
+dest_files=[ "res://.import/Coin Bag Pick Up 02.mp3-78241ed6987b5c667a3457e869c07946.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

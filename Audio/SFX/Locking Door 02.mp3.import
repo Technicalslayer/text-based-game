@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Locking Door 02.mp3-530ad5508a7bfff6ab777bc4eb4610cf.mp3str"
+
+[deps]
+
+source_file="res://Audio/SFX/Locking Door 02.mp3"
+dest_files=[ "res://.import/Locking Door 02.mp3-530ad5508a7bfff6ab777bc4eb4610cf.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

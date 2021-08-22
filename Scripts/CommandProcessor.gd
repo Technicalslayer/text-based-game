@@ -52,7 +52,7 @@ func go(second_word: String, result: CommandResult) -> CommandResult:
 	# check that direction is valid
 	if second_word in current_room.exits:
 		result.text = "You go %s" % second_word
-		result.target = current_room.exits[second_word].connected_exit
+		result.target = current_room.exits[second_word]
 		if result.target.locked:
 			result.text = "That exit is locked"
 		else:

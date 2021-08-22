@@ -11,12 +11,16 @@ onready var text_controller = find_node("TextSide")
 
 var inventory_item_scene = preload("res://Scenes/InventoryItem.tscn")
 
+signal audio_triggered(sound_name)
 
 func _ready() -> void:
 	change_rooms(current_exit)
 	# pass reference
 	if command_processor:
 		command_processor.player = player
+		
+	# connect audio manager
+	connect("audio_triggered", get_node("/root/AudioManager"), "play_audio")
 
 
 func change_rooms(exit: Exit):
@@ -24,7 +28,7 @@ func change_rooms(exit: Exit):
 	player.global_position = exit.entrance_position.global_position
 	# switch rooms
 	current_room = exit.get_parent()
-	
+	emit_signal("audio_triggered", AudioManager.Sound_Clips.DOOR)
 	# update command processor with neccessary info
 	command_processor.current_room = current_room
 	
@@ -77,6 +81,7 @@ func pickup_item(response):
 		inv_item.item_type = response.target.item_type
 		
 		player.add_item(inv_item)
+		emit_signal("audio_triggered", AudioManager.Sound_Clips.PICKUP)
 		# remove item from room
 		response.target.queue_free()
 	pass
@@ -88,6 +93,7 @@ func use_item(response):
 			Item.Item_Type.KEY:
 				# unlock door
 				response.target.locked = false
+				emit_signal("audio_triggered", AudioManager.Sound_Clips.UNLOCK)
 #				response.target.unlock_door()
 				# remove key
 				player.remove_item(response.item)

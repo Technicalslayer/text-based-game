@@ -54,6 +54,10 @@ config/name="Text Based Game"
 run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+AudioManager="*res://Scenes/AudioManager.tscn"
+
 [display]
 
 window/size/width=800

@@ -23,4 +23,8 @@ func _on_body_entered(body: Node) -> void:
 	print("Exit: " + name)
 	# move player to connected exit's position node
 	if body.is_in_group("player"):
-		emit_signal("player_entered", connected_exit)
+		if locked:
+			# indicate that door is locked
+			pass
+		else:
+			emit_signal("player_entered", connected_exit)
