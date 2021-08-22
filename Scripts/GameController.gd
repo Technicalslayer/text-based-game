@@ -56,6 +56,7 @@ func _on_Input_text_entered(new_text: String) -> void:
 				pickup_item(response)
 				pass
 			CommandProcessor.Command.USE:
+				use_item(response)
 				pass
 			CommandProcessor.Command.HELP:
 				pass
@@ -79,3 +80,14 @@ func pickup_item(response):
 		# remove item from room
 		response.target.queue_free()
 	pass
+
+
+func use_item(response):
+	if response.valid:
+		match response.item.item_type:
+			Item.Item_Type.KEY:
+				# unlock door
+				response.target.locked = false
+#				response.target.unlock_door()
+				# remove key
+				player.remove_item(response.item)

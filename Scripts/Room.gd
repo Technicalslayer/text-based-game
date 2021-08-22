@@ -2,7 +2,7 @@ extends Node2D
 class_name Room #allow passing as a class
 
 
-var exits =  {} # key: exit direction, value: connected_exit
+var exits =  {} # key: exit direction, value: exit instance
 var items = {} # key: name, value: node
 var characters = {} # key: name, value: node
 
@@ -16,7 +16,7 @@ func _ready() -> void:
 	# populate exits dictionary
 	for i in get_children():
 		if i.is_in_group("exits"):
-			exits[i.direction.to_lower()] = i.connected_exit
+			exits[i.direction.to_lower()] = i
 			exit_list += i.name + "  "
 		if i.is_in_group("items"):
 			items[i.name.to_lower()] = i

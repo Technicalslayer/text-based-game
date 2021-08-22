@@ -7,6 +7,7 @@ class CommandResult:
 	var passed_command # enum of type Command
 	var valid:bool = false # indicates command can be executed
 	var target # target node
+	var item # the item that was used
 	var text:String # string to display
 
 
@@ -51,7 +52,7 @@ func go(second_word: String, result: CommandResult) -> CommandResult:
 	# check that direction is valid
 	if second_word in current_room.exits:
 		result.text = "You go %s" % second_word
-		result.target = current_room.exits[second_word]
+		result.target = current_room.exits[second_word].connected_exit
 		if result.target.locked:
 			result.text = "That exit is locked"
 		else:
@@ -116,14 +117,19 @@ func use(second_word: String, result: CommandResult) -> CommandResult:
 	result.passed_command = Command.USE
 	# check that the item is present in the player's inventory
 	if second_word in player.inventory:
-		result.valid = true
-		result.target = player.inventory[second_word]
+		result.item = player.inventory[second_word]
 		# determine item type and find a target for it
-		if result.target is InventoryItem:
-			match result.target.item_type:
+		if result.item is InventoryItem:
+			match result.item.item_type:
 				Item.Item_Type.KEY:
-					# check for valid room
-					result.text = "Using key"
+					result.text = "There isn't a place to use that."
+					# check for valid door
+					for e in current_room.exits:
+						if current_room.exits[e].locked:
+							result.target = current_room.exits[e]
+							result.text = "Using key"
+							result.valid = true
+							break
 				_:
 					printerr("Item_Type response in use function not setup.")
 					pass

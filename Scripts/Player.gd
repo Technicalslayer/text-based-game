@@ -18,7 +18,7 @@ func add_item(item):
 	if item.item_type == Item.Item_Type.KEY:
 		if "key" in inventory:
 			# add to key count
-			inventory["key"].count += 1
+			inventory["key"].key_count += 1
 		else:
 			# add key to inventory
 			inventory["key"] = item
@@ -27,6 +27,22 @@ func add_item(item):
 	else:
 		inventory[item.name.tolower()] = item
 		add_child(item)
+	# update display?
+	# update inventory string
+	_update_inventory_string()
+
+
+func remove_item(item):
+	if item.item_type == Item.Item_Type.KEY:
+		if "key" in inventory:
+			# add to key count
+			inventory["key"].key_count -= 1
+			if inventory["key"].key_count == 0:
+				# remove key item
+				inventory.erase("key")
+		else:
+			printerr("There weren't any keys in the inventory.")
+	item.queue_free()
 	# update display?
 	# update inventory string
 	_update_inventory_string()

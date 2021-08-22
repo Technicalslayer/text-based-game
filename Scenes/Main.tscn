@@ -201,6 +201,7 @@ position = Vector2( 363.487, 586.211 )
 connected_exit_path = NodePath("../../Room/North")
 direction = "South"
 description = "A plain looking door."
+locked = true
 
 [node name="Position2D" parent="LiveSide/Room2/South" index="1"]
 position = Vector2( 0, -42.8598 )
@@ -208,8 +209,8 @@ position = Vector2( 0, -42.8598 )
 [node name="Key" parent="LiveSide/Room2" instance=ExtResource( 11 )]
 position = Vector2( 360.628, 313.534 )
 
-[connection signal="text_entered" from="CanvasLayer/TextSide/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="CanvasLayer/TextSide/MarginContainer/Rows/InputArea/HBoxContainer/Input" method="_on_Input_text_entered"]
 [connection signal="text_entered" from="CanvasLayer/TextSide/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="." method="_on_Input_text_entered"]
+[connection signal="text_entered" from="CanvasLayer/TextSide/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="CanvasLayer/TextSide/MarginContainer/Rows/InputArea/HBoxContainer/Input" method="_on_Input_text_entered"]
 
 [editable path="LiveSide/Room/North"]
 [editable path="LiveSide/Room2/South"]
