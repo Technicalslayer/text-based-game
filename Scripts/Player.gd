@@ -4,6 +4,13 @@ export (int) var move_speed = 200
 
 var inventory = {} # key: item name, value: node
 var inventory_as_text: String = "In your pockets, you have: "
+var last_movement: Vector2
+
+signal item_collided
+
+func _ready() -> void:
+	var controller = get_node("/root/Main")
+	connect("item_collided", controller, "pickup_item_collision")
 
 
 func _physics_process(delta: float) -> void:
@@ -12,6 +19,9 @@ func _physics_process(delta: float) -> void:
 		Input.get_action_strength("move_down") - Input.get_action_strength("move_up"))
 	movement = movement.normalized() * move_speed
 	move_and_slide(movement)
+	
+	if movement.length() > 0:
+		last_movement = movement
 
 
 func add_item(item):
@@ -64,3 +74,9 @@ func _update_inventory_string():
 		if current_index < inv_size-1:
 			inventory_as_text += ", "
 		current_index += 1
+
+
+func _on_InteractionRange_body_entered(body: Node) -> void:
+	if body.is_in_group("items"):
+		# pick up item
+		emit_signal("item_collided", body)

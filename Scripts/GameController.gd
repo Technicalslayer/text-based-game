@@ -87,6 +87,17 @@ func pickup_item(response):
 	pass
 
 
+func pickup_item_collision(item):
+	var inv_item = inventory_item_scene.instance()
+	inv_item.name = item.name
+	inv_item.description = item.description
+	inv_item.item_type = item.item_type
+	player.add_item(inv_item)
+	emit_signal("audio_triggered", AudioManager.Sound_Clips.PICKUP)
+	# remove item from room
+	item.queue_free()
+
+
 func use_item(response):
 	if response.valid:
 		match response.item.item_type:
