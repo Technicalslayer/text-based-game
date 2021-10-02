@@ -57,6 +57,7 @@ func go(second_word: String, result: CommandResult) -> CommandResult:
 			result.text = "That exit is locked"
 		else:
 			result.valid = true
+			result.target = result.target.connected_exit
 	else:
 		result.text = "There's not an exit there"
 	return result

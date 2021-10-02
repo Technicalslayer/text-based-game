@@ -12,19 +12,18 @@ export (bool) var locked = false
 onready var entrance_position = $Position2D
 
 signal player_entered
+signal action_spoofed(spoofed_text)
 
 
 func _ready() -> void:
 	var controller = get_node("/root/Main")
-	connect("player_entered", controller, "change_rooms")
+#	connect("player_entered", controller, "change_rooms")
+	connect("action_spoofed", controller, "_on_Input_spoofed")
 
 
 func _on_body_entered(body: Node) -> void:
 	print("Exit: " + name)
 	# move player to connected exit's position node
 	if body.is_in_group("player"):
-		if locked:
-			# indicate that door is locked
-			pass
-		else:
-			emit_signal("player_entered", connected_exit)
+		var input_string = "go " + name
+		emit_signal("action_spoofed", input_string)

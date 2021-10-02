@@ -7,10 +7,12 @@ var inventory_as_text: String = "In your pockets, you have: "
 var last_movement: Vector2
 
 signal item_collided
+signal action_spoofed(spoofed_text) # emitted when action performed that has text-side equivalent
 
 func _ready() -> void:
 	var controller = get_node("/root/Main")
-	connect("item_collided", controller, "pickup_item_collision")
+#	connect("item_collided", controller, "pickup_item_collision")
+	connect("action_spoofed", controller, "_on_Input_spoofed")
 
 
 func _physics_process(delta: float) -> void:
@@ -79,4 +81,6 @@ func _update_inventory_string():
 func _on_InteractionRange_body_entered(body: Node) -> void:
 	if body.is_in_group("items"):
 		# pick up item
-		emit_signal("item_collided", body)
+#		emit_signal("item_collided", body)
+		var input_string = "pickup " + body.name
+		emit_signal("action_spoofed", input_string)

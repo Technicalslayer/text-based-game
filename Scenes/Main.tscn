@@ -204,7 +204,7 @@ description = "A plain looking door."
 locked = true
 
 [node name="Position2D" parent="LiveSide/Room2/South" index="1"]
-position = Vector2( 0, -42.8598 )
+position = Vector2( 1.58917, -47.6274 )
 
 [node name="Key" parent="LiveSide/Room2" instance=ExtResource( 11 )]
 position = Vector2( 360.628, 313.534 )

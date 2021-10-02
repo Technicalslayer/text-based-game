@@ -71,6 +71,30 @@ func _on_Input_text_entered(new_text: String) -> void:
 			_:
 				pass
 
+# Called by certain live-side actions to spoof a text input
+func _on_Input_spoofed(new_text: String) -> void:
+	if new_text.empty(): # do nothing
+		return
+	var response = command_processor.process_command(new_text)
+	
+	# add only response to display
+	text_controller.add_response(response.text)
+	
+	# change game state based on response
+	# get command enum
+	match response.passed_command:
+		CommandProcessor.Command.GO:
+			if response.valid:
+				change_rooms(response.target)
+		CommandProcessor.Command.PICKUP:
+			# move target to player's inventory
+			pickup_item(response)
+			pass
+		CommandProcessor.Command.USE:
+			use_item(response)
+			pass
+		_:
+			pass
 
 func pickup_item(response):
 	if response.valid:
@@ -87,15 +111,15 @@ func pickup_item(response):
 	pass
 
 
-func pickup_item_collision(item):
-	var inv_item = inventory_item_scene.instance()
-	inv_item.name = item.name
-	inv_item.description = item.description
-	inv_item.item_type = item.item_type
-	player.add_item(inv_item)
-	emit_signal("audio_triggered", AudioManager.Sound_Clips.PICKUP)
-	# remove item from room
-	item.queue_free()
+#func pickup_item_collision(item):
+#	var inv_item = inventory_item_scene.instance()
+#	inv_item.name = item.name
+#	inv_item.description = item.description
+#	inv_item.item_type = item.item_type
+#	player.add_item(inv_item)
+#	emit_signal("audio_triggered", AudioManager.Sound_Clips.PICKUP)
+#	# remove item from room
+#	item.queue_free()
 
 
 func use_item(response):
